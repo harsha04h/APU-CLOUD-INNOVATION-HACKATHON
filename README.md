@@ -5,7 +5,7 @@
 
 Campuses waste energy and room capacity because nobody sees what is happening in real time: rooms are booked but empty, air conditioners run in empty rooms, and equipment faults are found late. Smart Space Orchestrator watches rooms through connected sensors, decides automatically, and sends commands back to the devices.
 
-![Dashboard](screenshots/1.png)
+![Dashboard](screenshots/2.png)
 
 ## What it does
 
