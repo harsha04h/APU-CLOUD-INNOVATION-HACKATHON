@@ -151,9 +151,18 @@ def kpi(label, value, color="#1e3a8a"):
     first = load()
     st.session_state.pressed = bool(first and first["demo_start"] is not None)
 
-# Button label: always show "Start demo" for a fresh visitor session
+# Reset demo state when a new visitor opens the page
 if "pressed" not in st.session_state:
     st.session_state.pressed = False
+    conn = sqlite3.connect(DB_FILE, timeout=10)
+    try:
+        conn.execute("DELETE FROM control WHERE key IN ('demo_start', 'ack')")
+        conn.execute("DELETE FROM actions")
+        conn.commit()
+    except Exception:
+        pass
+    finally:
+        conn.close()
 
 # ---------- Sidebar ----------
 with st.sidebar:
