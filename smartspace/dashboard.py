@@ -148,8 +148,8 @@ def kpi(label, value, color="#1e3a8a"):
 
 # Button label: "Start" first, "Restart" once a demo has been started
 # if "pressed" not in st.session_state:
-    first = load()
-    st.session_state.pressed = bool(first and first["demo_start"] is not None)
+    # first = load()
+    # st.session_state.pressed = bool(first and first["demo_start"] is not None)
 
 # Reset demo state when a new visitor opens the page
 if "pressed" not in st.session_state:
@@ -163,7 +163,7 @@ if "pressed" not in st.session_state:
         pass
     finally:
         conn.close()
-
+        
 # ---------- Sidebar ----------
 with st.sidebar:
     st.header("📖 Demo guide")

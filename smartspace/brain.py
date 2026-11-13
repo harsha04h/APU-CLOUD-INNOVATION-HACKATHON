@@ -91,9 +91,15 @@ def on_message(client, userdata, msg):
         return
     now = time.time()
 
-    # Did someone press "Start demo" on the dashboard?
+    # Did someone press "Start demo" or reset the dashboard?
     demo_start = get_demo_start()
-    if demo_start is not None and demo_start != last_start:
+    if demo_start is None and last_start is not None:
+        last_start = None
+        state.clear()
+        state.update(fresh_state())
+        client.publish(f"{PREFIX}/control/reset", "1")
+        print("Demo reset to READY state")
+    elif demo_start is not None and demo_start != last_start:
         last_start = demo_start
         state.clear()
         state.update(fresh_state())
