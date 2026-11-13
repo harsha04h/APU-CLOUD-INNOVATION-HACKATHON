@@ -7,6 +7,24 @@ import streamlit as st
 
 from config import *
 
+import subprocess
+import sys
+import os
+import streamlit as st
+
+@st.cache_resource
+def start_background_services():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    brain_path = os.path.join(base_dir, "brain.py")
+    sim_path = os.path.join(base_dir, "simulator.py")
+    
+    # Start brain.py and simulator.py inside the cloud container
+    subprocess.Popen([sys.executable, brain_path])
+    subprocess.Popen([sys.executable, sim_path])
+    return True
+
+start_background_services()
+
 st.set_page_config(page_title="Smart Space Orchestrator", page_icon="🏫", layout="wide")
 
 if not hasattr(st, "fragment"):
